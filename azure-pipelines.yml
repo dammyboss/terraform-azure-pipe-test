@@ -21,8 +21,7 @@ stages:
       - job: validate
         continueOnError: false
         steps:
-          - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
-            displayName: tfinstall
+          - task: TerraformInstaller@0
             inputs:
               terraformVersion: 'latest'
           
@@ -48,7 +47,7 @@ stages:
     jobs:
       - job: apply
         steps:
-          - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
+          - task: TerraformInstaller@0
             displayName: tfinstall
             inputs:
               terraformVersion: 'latest'
