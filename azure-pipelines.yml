@@ -21,7 +21,7 @@ stages:
       - job: validate
         continueOnError: false
         steps:
-          - task: TerraformInstaller@0
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
             displayName: tfinstall
             inputs:
               terraformVersion: 'latest'
@@ -48,7 +48,7 @@ stages:
     jobs:
       - job: apply
         steps:
-          - task: TerraformInstaller@0
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
             displayName: tfinstall
             inputs:
               terraformVersion: 'latest'
