@@ -21,7 +21,7 @@ stages:
       - job: validate
         continueOnError: false
         steps:
-          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+          - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
             displayName: tfinstall
             inputs:
               terraformVersion: 'latest'
@@ -48,7 +48,7 @@ stages:
     jobs:
       - job: apply
         steps:
-          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+          - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
             displayName: tfinstall
             inputs:
               terraformVersion: 'latest'
@@ -63,19 +63,12 @@ stages:
               backendAzureRmContainerName: '$(backendcontainer)'
               backendAzureRmKey: '$(backendstoragekey)'
           
-          # - task: TerraformTaskV3@3
-          #   displayName: Plan
-          #   inputs:
-          #     provider: 'azurerm'
-          #     command: 'plan'
-          #     environmentServiceNameAzureRM: 'tf-azure-pipeline-test'
-          
-          - task: TerraformCLI@0
+          - task: TerraformTaskV3@3
+            displayName: Plan
             inputs:
+              provider: 'azurerm'
               command: 'plan'
-              environmentServiceName: 'tf-azure-pipeline-test'
-              commandOptions: '-out=terraform.tfplan'
-              allowTelemetryCollection: false
+              environmentServiceNameAzureRM: 'tf-azure-pipeline-test'
             
           - task: TerraformTaskV3@3
             displayName: Apply
