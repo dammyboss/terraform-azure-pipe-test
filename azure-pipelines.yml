@@ -68,7 +68,6 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              commandOptions: '-out=terraform.tfplan'
               environmentServiceNameAzureRM: 'tf-azure-pipeline-test'
             
           - task: TerraformTaskV3@3
