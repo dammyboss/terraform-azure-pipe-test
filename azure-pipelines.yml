@@ -63,12 +63,19 @@ stages:
               backendAzureRmContainerName: '$(backendcontainer)'
               backendAzureRmKey: '$(backendstoragekey)'
           
-          - task: TerraformTaskV3@3
-            displayName: Plan
+          # - task: TerraformTaskV3@3
+          #   displayName: Plan
+          #   inputs:
+          #     provider: 'azurerm'
+          #     command: 'plan'
+          #     environmentServiceNameAzureRM: 'tf-azure-pipeline-test'
+          
+          - task: TerraformCLI@0
             inputs:
-              provider: 'azurerm'
               command: 'plan'
-              environmentServiceNameAzureRM: 'tf-azure-pipeline-test'
+              environmentServiceName: 'tf-azure-pipeline-test'
+              commandOptions: '-out=terraform.tfplan'
+              allowTelemetryCollection: false
             
           - task: TerraformTaskV3@3
             displayName: Apply
